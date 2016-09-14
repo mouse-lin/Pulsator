@@ -9,7 +9,7 @@ containerView.backgroundColor = UIColor.whiteColor()
 let sourceView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50))
 sourceView.contentMode = .ScaleAspectFit
 sourceView.center = CGPointMake(200, 200)
-sourceView.image = [#Image(imageLiteral: "IPhone_5s.png")#]
+sourceView.image = UIImage(#imageLiteral(resourceName: "IPhone_5s.png"))
 containerView.addSubview(sourceView)
 
 let pulsator = Pulsator()
