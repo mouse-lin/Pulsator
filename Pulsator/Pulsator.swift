@@ -9,11 +9,11 @@
 
 
 import UIKit
-import QuartzCore.QuartzCore
+import QuartzCore
 
 internal let kPulsatorAnimationKey = "pulsator"
 
-public class Pulsator: CAReplicatorLayer {
+public class Pulsator: CAReplicatorLayer, CAAnimationDelegate {
 
     private let pulse = CALayer()
     private var animationGroup: CAAnimationGroup!
@@ -22,6 +22,7 @@ public class Pulsator: CAReplicatorLayer {
     override public var backgroundColor: CGColor? {
         didSet {
             pulse.backgroundColor = backgroundColor
+            guard let backgroundColor = backgroundColor else {return}
             let oldAlpha = alpha
             alpha = CGColorGetAlpha(backgroundColor)
             if alpha != oldAlpha {
@@ -204,10 +205,9 @@ public class Pulsator: CAReplicatorLayer {
         animationGroup = nil
     }
     
-    
     // MARK: - Delegate methods for CAAnimation
-    
-    override public func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+
+    public func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         if pulse.animationKeys()?.count > 0 {
             pulse.removeAllAnimations()
         }
